@@ -12,7 +12,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -34,11 +34,11 @@ public class Student {
         this.email = email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -79,6 +79,12 @@ public class Student {
             courses = new ArrayList<>();
         }
         courses.add(theCourse);
+
+        if (theCourse.getStudents() == null){
+            theCourse.setStudents(new ArrayList<>());
+        }
+        theCourse.getStudents().add(this);
+
     }
 
     @Override

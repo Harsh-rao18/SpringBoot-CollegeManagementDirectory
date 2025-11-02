@@ -1,5 +1,6 @@
 package com.harsh.CollegeManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Course {
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
+    @JsonIgnore
     private Instructor instructor;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -61,6 +63,14 @@ public class Course {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public void addReview(Review theReview){
